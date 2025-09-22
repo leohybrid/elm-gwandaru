@@ -1,0 +1,17 @@
+{
+  "name": "elm-gwandaru",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "npx rollup -c rollup.config.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.22.0",
+    "@babel/preset-env": "^7.22.0",
+    "@rollup/plugin-babel": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-terser": "^0.4.0",
+    "bootstrap": "^5.3.0",
+    "rollup": "^4.0.0"
+  }
+}
