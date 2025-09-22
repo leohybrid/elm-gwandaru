@@ -1,3 +1,4 @@
+
 title: "ELM GWANDARU"
 description: "Poems x writtings and Artwork by Elm Gwandaru"
 baseurl: ""
@@ -13,9 +14,5 @@ plugins:
   - jekyll-paginate
 exclude:
   - feed.xml
-  - _site/
-  - node_modules/
-  - .sass-cache/
-  - .jekyll-cache/
 feed:
   disable: true
