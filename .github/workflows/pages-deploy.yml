@@ -1,15 +1,9 @@
-# Workflow name
 name: Pages
-
-# Update the version number of Jekyll when needed
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the `master` branch
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
 jobs:
   pages:
     runs-on: ubuntu-latest
@@ -19,47 +13,36 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3.9
           bundler-cache: true
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
       - name: Install dependencies
         run: |
           bundle install
           npm ci
-
       - name: Build with Jekyll
-        # OUTPUT: "_site"
         run: bundle exec jekyll b --profile
-
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v3
         with:
           path: '_site/'
-
   deploy:
     needs: pages
-
     permissions:
       pages: write
       id-token: write
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
