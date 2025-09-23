@@ -2,13 +2,13 @@
 
 **layout: post**
 
-**title: "Thankful; just a thankful MF"**
+**title: "First Blog Post"**
 
 **date: 2025-09-23**
 
 **permalink: /blog/first-blog-post/**
 
-**category: blog**
+**categories: blog**
 
 **---**
 

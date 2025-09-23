@@ -1,17 +1,10 @@
-title: "ELM GWANDARU"
-description: "Poems x writtings and Artwork by Elm Gwandaru"
-baseurl: ""
+title: ELM GWANDARU
+description: Poems, writing and artwork by Elm Gwandaru, blending surrealism and African motifs.
 url: "https://leohybrid.github.io/elm-gwandaru"
-theme: jekyll-theme-chirpy
 timezone: Africa/Nairobi
-lang: en
-avatar: /assets/img/favicons/favicon.ico
-paginate: 10
-markdown: kramdown
+permalink: pretty
+include:
+  - _pages
+  - _posts
 plugins:
-  - jekyll-seo-tag
-  - jekyll-paginate
-exclude:
-  - feed.xml
-feed:
-  disable: true
+  - jekyll-include-cache
