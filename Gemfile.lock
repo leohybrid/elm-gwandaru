@@ -136,6 +136,8 @@ GEM
       ethon (>= 0.9.0, < 0.16.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2025.2)
+      tzinfo (>= 1.0.0)
     unicode-display_width (2.6.0)
     webrick (1.9.1)
     yell (2.2.2)
@@ -146,13 +148,14 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  base64
-  csv
+  base64 (~> 0.2)
+  csv (~> 3.3)
   html-proofer
   jekyll (~> 4.3.4)
   jekyll-include-cache
   jekyll-theme-chirpy (~> 7.0)
-  tzinfo
+  tzinfo (~> 2.0)
+  tzinfo-data (~> 1.2025)
 
 BUNDLED WITH
    2.7.2
