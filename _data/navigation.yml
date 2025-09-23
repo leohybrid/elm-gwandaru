@@ -4,5 +4,13 @@
   url: /about/
 - title: Poetry
   url: /categories/poetry/
-- title: Poems
-  url: /posts/
+- title: Blog
+  url: /blog/
+- title: Talk to ELM
+  url: /social/
+- title: Satire
+  url: /satire/
+- title: Kong Andventures
+  url: /kong-andventures/
+- title: Support Us
+  url: /support/
