@@ -1,6 +1,7 @@
 ---
-layout: page
+layout: category
 title: Satire
 permalink: /satire/
+category: satire
 ---
-Sharp, witty takes on life and culture, infused with humor and surrealist twists.
+Sharp, witty takes on life and culture.

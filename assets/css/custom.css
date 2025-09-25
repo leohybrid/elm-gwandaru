@@ -1,0 +1,31 @@
+/* Sidebar button styles */
+.sidebar-link {
+  background: #222;
+  color: #fff;
+  transition: background .18s ease, transform .12s ease, box-shadow .12s;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.25);
+}
+
+.sidebar-link:hover {
+  background: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* active/current page style */
+.sidebar-link.active {
+  background: #0a84ff; /* bright accent */
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(10,132,255,0.14);
+}
+
+/* site title tweaks if you want to change later */
+.site-title .first-name,
+.site-title .last-name {
+  letter-spacing: 0.06rem;
+}
+
+/* If theme sets sidebar as fixed, ensure width and left spacing */
+.sidebar {
+  z-index: 900; /* below topbar (9999) */
+}

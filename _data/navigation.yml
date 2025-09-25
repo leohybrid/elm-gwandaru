@@ -3,14 +3,14 @@
 - title: About
   url: /about/
 - title: Poetry
-  url: /categories/poetry/
+  url: /poetry/
 - title: Blog
-  url: /categories/blog/
+  url: /blog/
 - title: Talk to ELM
   url: /social/
 - title: Satire
   url: /satire/
-- title: Kong Andventures
-  url: /kong-andventures/
+- title: Kong Adventures
+  url: /kong-adventures/
 - title: Support Us
   url: /support/

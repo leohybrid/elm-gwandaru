@@ -1,10 +1,29 @@
-title: ELM GWANDARU
-description: Poems and artwork by Elm Gwandaru, blending surrealism and African motifs.
+title: "ELM GWANDARU"
+description: "Poems x writings and Artwork by Elm Gwandaru"
+baseurl: ""                  # leave blank for root
 url: "https://leohybrid.github.io/elm-gwandaru"
+
+# Use the gem-based theme (no remote_theme)
+theme: jekyll-theme-chirpy
+
 timezone: Africa/Nairobi
+lang: en
+
+# Home pagination
+paginate: 10
+paginate_path: "/page:num/"
 permalink: pretty
-include:
-  - _pages
-  - _posts
+
+# Plugins (must match Gemfile)
 plugins:
+  - jekyll-seo-tag
+  - jekyll-paginate
   - jekyll-include-cache
+
+# Exclude noisy files
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+

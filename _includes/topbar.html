@@ -1,77 +1,76 @@
-<!-- The Top Bar -->
+<!-- /_includes/topbar.html -->
 
-<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar">
-  <div
-    id="topbar"
-    class="d-flex align-items-center justify-content-between px-lg-3 h-100"
-  >
-    <nav id="breadcrumb" aria-label="Breadcrumb">
-      {% assign paths = page.url | split: '/' %}
+<style>
+/* Topbar + layout tweaks (single place to edit) */
+:root { --elm-topbar-height: 64px; }
 
-      {% if paths.size == 0 or page.layout == 'home' %}
-        <!-- index page -->
-        <span>{{ site.data.locales[include.lang].tabs.home | capitalize }}</span>
+.topbar-custom {
+  width: 100%;
+  background-color: #0b0b0b;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  padding: 10px 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  height: var(--elm-topbar-height);
+  box-sizing: border-box;
+}
 
-      {% else %}
-        {% for item in paths %}
-          {% if forloop.first %}
-            <span>
-              <a href="{{ '/' | relative_url }}">
-                {{- site.data.locales[include.lang].tabs.home | capitalize -}}
-              </a>
-            </span>
+/* push page content down so it is not hidden under the fixed topbar */
+body { padding-top: var(--elm-topbar-height); }
 
-          {% elsif forloop.last %}
-            {% if page.collection == 'tabs' %}
-              <span>{{ site.data.locales[include.lang].tabs[item] | default: page.title }}</span>
-            {% else %}
-              <span>{{ page.title }}</span>
-            {% endif %}
+/* ensure the left (sidebar) and right (panel) are offset from topbar */
+#sidebar {
+  /* if the theme makes sidebar fixed, shift it down so avatar is visible */
+  top: var(--elm-topbar-height) !important;
+}
 
-          {% elsif page.layout == 'category' or page.layout == 'tag' %}
-            <span>
-              <a href="{{ item | append: '/' | relative_url }}">
-                {{- site.data.locales[include.lang].tabs[item] | default: page.title -}}
-              </a>
-            </span>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    </nav>
-    <!-- endof #breadcrumb -->
+/* tiny nudge of the right panel to avoid overlap (if needed) */
+#panel-wrapper {
+  margin-top: 8px;
+}
 
-    <button type="button" id="sidebar-trigger" class="btn btn-link" aria-label="Sidebar">
-      <i class="fas fa-bars fa-fw"></i>
-    </button>
+/* topbar elements */
+.topbar-title h1 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.topbar-title a { color: #fff; text-decoration: none; }
 
-    <div id="topbar-title">
-      {% if page.layout == 'home' %}
-        {{- site.data.locales[include.lang].title | default: site.title -}}
-      {% elsif page.collection == 'tabs' or page.layout == 'page' %}
-        {%- capture tab_key -%}{{ page.url | split: '/' }}{%- endcapture -%}
-        {{- site.data.locales[include.lang].tabs[tab_key] | default: page.title -}}
-      {% else %}
-        {{- site.data.locales[include.lang].layout[page.layout] | default: page.layout | capitalize -}}
-      {% endif %}
-    </div>
+/* keep search area tidy */
+.topbar-search { display:flex; align-items:center; gap:.5rem; color:#fff;}
+.topbar-search a, .topbar-search button { color: #fff; text-decoration: none; background: transparent; border: none; cursor: pointer; }
 
-    <button type="button" id="search-trigger" class="btn btn-link" aria-label="Search">
-      <i class="fas fa-search fa-fw"></i>
-    </button>
+/* small screens */
+@media (max-width: 640px) {
+  :root { --elm-topbar-height: 72px; }
+}
+</style>
 
-    <search id="search" class="align-items-center ms-3 ms-lg-0">
-      <i class="fas fa-search fa-fw"></i>
-      <input
-        class="form-control"
-        id="search-input"
-        type="search"
-        aria-label="search"
-        autocomplete="off"
-        placeholder="{{ site.data.locales[include.lang].search.hint | capitalize }}..."
-      >
-    </search>
-    <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">
-      {{- site.data.locales[include.lang].search.cancel -}}
-    </button>
+<!-- load your custom css file (kept outside the <style> tag) -->
+<link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
+<header class="topbar-custom" role="banner" aria-label="Top Bar">
+  <!-- Left: Title -->
+  <div class="topbar-title" aria-hidden="false">
+    <h1><a href="{{ '/' | relative_url }}">ELM GWANDARU</a></h1>
+  </div>
+
+  <!-- Right: Search (uses theme search include if available) -->
+  <div class="topbar-search" role="search" aria-label="Topbar search">
+    {% if site.static_files | map: "path" | join: "" contains "search" %}
+      {% include search.html %}
+    {% else %}
+      <a class="btn btn-link" href="{{ '/search/' | relative_url }}" aria-label="Search">
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </a>
+    {% endif %}
   </div>
 </header>

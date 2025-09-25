@@ -1,6 +1,7 @@
 ---
-layout: page
+layout: category
 title: Blog
 permalink: /blog/
+category: blog
 ---
-Welcome to my blog, where I share thoughts, stories, and creative musings inspired by surrealism and African heritage.
+All my blog posts, newest to oldest.
