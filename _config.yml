@@ -1,5 +1,11 @@
 title: "ELM GWANDARU"
+
+# Tagline shown on your site (sidebar, footer, etc.)
 description: Poems, writings and artwork by Elm Gwandaru, blending surrealism and African motifs.
+
+# Extra SEO-only description (for Google, Twitter, OpenGraph)
+seo_description: A surrealist journey through poems, writings, and artwork by Elm Gwandaru — blending raw imagination with African heritage and modern rebellion.
+
 baseurl: ""                  # leave blank for root
 url: "https://leohybrid.github.io/elm-gwandaru"
 
@@ -26,4 +32,3 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
-
