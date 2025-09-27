@@ -1,0 +1,58 @@
+<!-- Custom sidebar override to use _data/navigation.yml -->
+<nav id="sidebar" class="sidebar" role="navigation"
+     style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh;">
+
+  <div class="sidebar-top" style="text-align:center;">
+    <!-- Profile image (placeholder). Replace 'avatar.png' later with your real image -->
+    <div class="sidebar-avatar" style="margin-bottom:12px;">
+      <img src="{{ '/assets/img/avatar.png' | relative_url }}" alt="Avatar"
+           style="border-radius:50%; width:120px; height:120px; object-fit:cover;">
+    </div>
+
+    <!-- Site title in two lines -->
+    <h1 class="site-title" style="margin:6px 0 18px 0; font-weight:700;">
+      <a href="{{ '/' | relative_url }}" style="text-decoration:none; color:inherit;">
+        <span class="first-name" style="display:block; font-size:1.6rem; line-height:1;">ELM</span>
+        <span class="last-name" style="display:block; font-size:1.6rem; line-height:1;">GWANDARU</span>
+      </a>
+    </h1>
+  </div>
+
+  <!-- Navigation links with pop-up effect -->
+  <ul class="sidebar-nav" style="list-style:none; padding:0; margin-top:16px; width:100%; text-align:center;">
+    {% if site.data.navigation %}
+      {% for item in site.data.navigation %}
+        {% assign link_url = item.url | relative_url %}
+        {% assign cur = page.url | default: '/' %}
+        {% assign is_active = false %}
+        {% if cur == link_url or cur == item.url or cur contains item.url %}
+          {% assign is_active = true %}
+        {% endif %}
+        <li class="sidebar-item" style="margin-bottom:12px;">
+          <a href="{{ link_url }}" 
+             class="sidebar-link{% if is_active %} active{% endif %}"
+             style="display:inline-block; padding:10px 18px; border-radius:12px;
+                    text-align:center; text-decoration:none; font-weight:600; color:#000;
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;">
+            {{ item.title }}
+          </a>
+        </li>
+      {% endfor %}
+    {% else %}
+      <li><a href="{{ '/' | relative_url }}">Home</a></li>
+    {% endif %}
+  </ul>
+</nav>
+
+<style>
+/* Hover / active animations */
+.sidebar-link:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.sidebar-link.active {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+</style>

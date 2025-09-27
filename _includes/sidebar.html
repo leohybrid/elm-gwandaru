@@ -1,23 +1,7 @@
-<!-- Custom sidebar override to use _data/navigation.yml -->
+<!-- Custom sidebar override (buttons only) -->
 <nav id="sidebar" class="sidebar" role="navigation">
-  <div class="sidebar-top">
-    <!-- Profile image (placeholder). Replace 'avatar.png' later with your real image -->
-    <div class="sidebar-avatar" style="text-align:center; margin-bottom:8px;">
-      <img src="{{ '/assets/img/avatar.png' | relative_url }}" alt="Avatar"
-           style="border-radius:50%; width:120px; height:120px; object-fit:cover; display:block; margin:0 auto;">
-    </div>
-
-    <!-- Site title in two lines -->
-    <h1 class="site-title" style="text-align:center; margin:6px 0 12px 0; font-weight:700;">
-      <a href="{{ '/' | relative_url }}" style="text-decoration:none; color:inherit;">
-        <span class="first-name" style="display:block; font-size:1.4rem; line-height:1;">ELM</span>
-        <span class="last-name" style="display:block; font-size:1.4rem; line-height:1;">GWANDARU</span>
-      </a>
-    </h1>
-  </div>
-
-  <!-- Navigation links as button-like items -->
-  <ul class="sidebar-nav" style="list-style:none; padding:0 12px;">
+  <!-- Scrollable Navigation -->
+  <ul class="sidebar-nav">
     {% if site.data.navigation %}
       {% for item in site.data.navigation %}
         {% assign link_url = item.url | relative_url %}
@@ -26,8 +10,8 @@
         {% if cur == link_url or cur == item.url or cur contains item.url %}
           {% assign is_active = true %}
         {% endif %}
-        <li class="sidebar-item" style="margin-bottom:6px;">
-          <a href="{{ link_url }}" class="sidebar-link{% if is_active %} active{% endif %}" style="display:block; padding:10px 14px; border-radius:8px; text-align:center; text-decoration:none; font-weight:600;">
+        <li class="sidebar-item">
+          <a href="{{ link_url }}" class="sidebar-link{% if is_active %} active{% endif %}">
             {{ item.title }}
           </a>
         </li>
