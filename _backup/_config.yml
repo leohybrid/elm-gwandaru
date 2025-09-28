@@ -1,0 +1,34 @@
+title: "ELM GWANDARU"
+
+# Tagline shown on your site (sidebar, footer, etc.)
+description: Poems, writings and artwork by Elm Gwandaru, blending surrealism and African motifs.
+
+# Extra SEO-only description (for Google, Twitter, OpenGraph)
+seo_description: A surrealist journey through poems, writings, and artwork by Elm Gwandaru — blending raw imagination with African heritage and modern rebellion.
+
+baseurl: ""                  # leave blank for root
+url: "https://leohybrid.github.io/elm-gwandaru"
+
+# Use the gem-based theme (no remote_theme)
+theme: jekyll-theme-chirpy
+
+timezone: Africa/Nairobi
+lang: en
+
+# Home pagination
+paginate: 10
+paginate_path: "/page:num/"
+permalink: pretty
+
+# Plugins (must match Gemfile)
+plugins:
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-include-cache
+
+# Exclude noisy files
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor

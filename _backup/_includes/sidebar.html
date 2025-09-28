@@ -1,0 +1,23 @@
+<!-- Custom sidebar override (buttons only) -->
+<nav id="sidebar" class="sidebar" role="navigation">
+  <!-- Scrollable Navigation -->
+  <ul class="sidebar-nav">
+    {% if site.data.navigation %}
+      {% for item in site.data.navigation %}
+        {% assign link_url = item.url | relative_url %}
+        {% assign cur = page.url | default: '/' %}
+        {% assign is_active = false %}
+        {% if cur == link_url or cur == item.url or cur contains item.url %}
+          {% assign is_active = true %}
+        {% endif %}
+        <li class="sidebar-item">
+          <a href="{{ link_url }}" class="sidebar-link{% if is_active %} active{% endif %}">
+            {{ item.title }}
+          </a>
+        </li>
+      {% endfor %}
+    {% else %}
+      <li><a href="{{ '/' | relative_url }}">Home</a></li>
+    {% endif %}
+  </ul>
+</nav>

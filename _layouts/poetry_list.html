@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+<div class="poetry-list-container">
+
+  <h1 class="page-title">Poetry</h1>
+
+  {%- assign sorted_posts = site.posts | sort: "date" | reverse -%}
+
+  <div class="latest-poem">
+    {%- assign latest = sorted_posts | first -%}
+    <article class="poem-item latest">
+      <h2><a href="{{ latest.url | relative_url }}">{{ latest.title }}</a></h2>
+      <p class="date">{{ latest.date | date: "%b %d, %Y" }}</p>
+      <p class="excerpt">{{ latest.excerpt }}</p>
+    </article>
+  </div>
+
+  <hr>
+
+  <div class="other-poems">
+    {%- for post in sorted_posts offset: 1 -%}
+      <article class="poem-item">
+        <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+        <p class="date">{{ post.date | date: "%b %d, %Y" }}</p>
+        <p class="excerpt">{{ post.excerpt }}</p>
+      </article>
+    {%- endfor -%}
+  </div>
+
+</div>
