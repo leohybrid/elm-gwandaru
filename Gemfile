@@ -10,7 +10,7 @@ gem "jekyll-seo-tag"
 gem "jekyll-include-cache"
 
 # Optional but OK
-gem "html-proofer", group: :jekyll_plugins
+# gem "html-proofer", group: :jekyll_plugins
 
 # Windows support (safe to keep)
 gem "wdm", ">= 0.1.0", platforms: [:windows]
