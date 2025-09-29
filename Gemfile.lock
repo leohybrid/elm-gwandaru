@@ -139,6 +139,7 @@ GEM
     tzinfo-data (1.2025.2)
       tzinfo (>= 1.0.0)
     unicode-display_width (2.6.0)
+    wdm (0.2.0)
     webrick (1.9.1)
     yell (2.2.2)
     zeitwerk (2.7.3)
@@ -148,16 +149,17 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  base64 (~> 0.2)
-  csv (~> 3.3)
+  base64
+  csv
   html-proofer
   jekyll (~> 4.3.4)
   jekyll-include-cache
   jekyll-paginate
   jekyll-seo-tag
-  jekyll-theme-chirpy (~> 7.0)
-  tzinfo (~> 2.0)
-  tzinfo-data (~> 1.2025)
+  jekyll-theme-chirpy (~> 7.3)
+  tzinfo
+  tzinfo-data
+  wdm (>= 0.1.0)
 
 BUNDLED WITH
    2.7.2

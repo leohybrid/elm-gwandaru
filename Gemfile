@@ -1,20 +1,22 @@
 source "https://rubygems.org"
 
+# Core Jekyll setup (matches Chirpy theme 7.x and GitHub Pages)
 gem "jekyll", "~> 4.3.4"
+gem "jekyll-theme-chirpy", "~> 7.3"
 
-# Use the gem-based Chirpy theme (avoids remote-theme unzip issues on Windows)
-gem "jekyll-theme-chirpy", "~> 7.0"
-
-# Useful Jekyll plugins/gems
+# Required plugins
 gem "jekyll-paginate"
 gem "jekyll-seo-tag"
 gem "jekyll-include-cache"
-gem "html-proofer"
 
-# timezone / compatibility
-gem "tzinfo", "~> 2.0"
-gem "tzinfo-data", "~> 1.2025"
+# Optional but OK
+gem "html-proofer", group: :jekyll_plugins
 
-# explicit stdlib gems to silence Ruby warnings on newer Ruby
-gem "csv", "~> 3.3"
-gem "base64", "~> 0.2"
+# Windows support (safe to keep)
+gem "wdm", ">= 0.1.0", platforms: [:windows]
+
+# Silence Ruby 3.4 warnings
+gem "tzinfo"
+gem "tzinfo-data"
+gem "csv"
+gem "base64"
