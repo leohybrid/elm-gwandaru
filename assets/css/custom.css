@@ -1,32 +1,34 @@
-/* ===========================
-   Elm Gwandaru - custom.css
+/* =========================================================================
+   Elm Gwandaru — assets/css/custom.css
    Global animated background + sidebar button styles
-   Paste into: assets/css/custom.css
-   =========================== */
+   Paste the whole file (overwrite existing custom.css)
+   ========================================================================= */
 
 /* ---------- variables ---------- */
-:root{
-  --elm-topbar-height: 64px;   /* adjust if topbar taller */
-  --elm-footer-height: 60px;   /* space to avoid bottom overlap */
+:root {
+  --elm-topbar-height: 64px;
+  --elm-footer-height: 60px;
   --sidebar-width: 240px;
-  --matte-dark: #111213;
   --muted-gray: #bfbfbf;
   --accent-muted: rgba(255,255,255,0.06);
 }
 
 /* ---------- page offsets ---------- */
-/* push content below fixed topbar */
 body {
   padding-top: var(--elm-topbar-height);
   background: transparent;
   color: #eaeaea;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* --------- GLOBAL BACKGROUND (behind everything) --------- */
+/* ========================================================================
+   GLOBAL BACKGROUND LAYER
+   (fixed element behind all content; add the matching HTML block once)
+   ======================================================================== */
 #elm-background {
   position: fixed;
   inset: 0;
-  z-index: -1;                 /* behind all site UI */
+  z-index: -1;                /* behind site UI */
   pointer-events: none;
   overflow: hidden;
   background: linear-gradient(
@@ -38,113 +40,92 @@ body {
     #4a3210 100%
   );
   background-attachment: fixed;
-  filter: saturate(1.05);
 }
 
-/* ---------- starfield (top) ---------- */
-#elm-background::before{
+/* ---------- STARFIELD (top) ---------- */
+#elm-background::before {
   content: "";
   position: absolute;
-  inset: 0 0 60% 0; /* top 40% for starfield */
+  left: 0; right: 0; top: 0;
+  height: 42%;
   background:
-    radial-gradient(1.8px 1.8px at 12% 20%, rgba(255,255,255,0.95) 0, transparent 40%),
-    radial-gradient(1.2px 1.2px at 45% 12%, rgba(230,230,255,0.85) 0, transparent 40%),
-    radial-gradient(1.6px 1.6px at 78% 30%, rgba(200,225,255,0.85) 0, transparent 40%),
-    radial-gradient(1.0px 1.0px at 33% 40%, rgba(255,250,210,0.8) 0, transparent 40%),
-    radial-gradient(0.9px 0.9px at 88% 12%, rgba(240,240,255,0.85) 0, transparent 40%);
-  background-repeat: repeat;
-  background-size: 100% 100%;
-  opacity: 0.9;
+    radial-gradient(1.8px 1.8px at 10% 25%, rgba(255,255,255,0.95) 0, transparent 45%),
+    radial-gradient(1.2px 1.2px at 45% 12%, rgba(230,230,255,0.85) 0, transparent 45%),
+    radial-gradient(1.6px 1.6px at 78% 30%, rgba(200,225,255,0.85) 0, transparent 45%),
+    radial-gradient(1.0px 1.0px at 33% 40%, rgba(255,250,210,0.8) 0, transparent 45%),
+    radial-gradient(0.9px 0.9px at 88% 12%, rgba(240,240,255,0.85) 0, transparent 45%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.92;
   mix-blend-mode: screen;
   animation: star-twinkle 6s linear infinite;
 }
 
-/* subtle twinkle */
+/* gentle twinkle */
 @keyframes star-twinkle {
-  0% { opacity: 0.85; transform: translateY(0px); }
-  50% { opacity: 1; transform: translateY(-2px); }
-  100% { opacity: 0.85; transform: translateY(0); }
+  0%   { opacity: 0.86; transform: translateY(0); }
+  50%  { opacity: 1;    transform: translateY(-1px); }
+  100% { opacity: 0.86; transform: translateY(0); }
 }
 
-/* ---------- shooting stars (3) ---------- */
-#elm-background .shooting-star{
+/* ---------- SHOOTING STARS (children placed in HTML) ---------- */
+#elm-background .shooting-star {
   position: absolute;
-  top: 8%;
-  left: -10%;
-  width: 2px;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.0));
-  filter: blur(.3px) drop-shadow(0 0 6px rgba(255,255,255,0.25));
-  transform: rotate(-20deg);
+  width: 2px; height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0));
+  filter: blur(.3px) drop-shadow(0 0 6px rgba(255,255,255,0.18));
   opacity: 0;
-  &; /* placeholder so linter is okay */
+  transform: rotate(-18deg);
+  pointer-events: none;
 }
 
-/* assign variations via nth-child */
-#elm-background .shooting-star:nth-of-type(1){
-  top: 10%;
-  left: -20%;
-  width: 2px; height: 2px;
-  animation: shoot 3.6s linear 0.6s infinite;
+/* variations */
+#elm-background .shooting-star:nth-of-type(1) {
+  top: 8%; left: -24%;
+  animation: star-shoot 3.8s linear 0.4s infinite;
 }
-#elm-background .shooting-star:nth-of-type(2){
-  top: 18%;
-  left: -30%;
-  width: 2px; height: 2px;
-  animation: shoot 4.7s linear 2s infinite;
+#elm-background .shooting-star:nth-of-type(2) {
+  top: 18%; left: -30%;
+  animation: star-shoot 4.9s linear 1.8s infinite;
 }
-#elm-background .shooting-star:nth-of-type(3){
-  top: 6%;
-  left: -12%;
-  width: 2px; height: 2px;
-  animation: shoot 5.2s linear 1.2s infinite;
+#elm-background .shooting-star:nth-of-type(3) {
+  top: 6%; left: -12%;
+  animation: star-shoot 5.6s linear 1.1s infinite;
 }
 
-@keyframes shoot {
-  0% {
-    opacity: 0;
-    transform: translate(0, 0) rotate(-18deg) scaleX(1);
-  }
-  15% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translate(140vw, 80vh) rotate(-18deg) scaleX(0.2);
-  }
+@keyframes star-shoot {
+  0%   { opacity: 0; transform: translate(0,0) rotate(-18deg) scaleX(1); }
+  8%   { opacity: 1; }
+  40%  { opacity: 0.85; }
+  100% { opacity: 0; transform: translate(160vw, 90vh) rotate(-18deg) scaleX(0.2); }
 }
 
-/* ---------- Flower of Life band (middle) ---------- */
-#elm-background .flower-of-life{
+/* ---------- FLOWER OF LIFE (middle band) ---------- */
+/* approximate with tiled overlapping circles — subtle, low opacity */
+#elm-background .flower-of-life {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 0; right: 0;
   top: 28%;
   height: 36%;
   opacity: 0.08;
   pointer-events: none;
-  /* hex tiling of faint circles to simulate flower-of-life */
   background-image:
     radial-gradient(circle at 30px 30px, rgba(255,255,255,0.18) 0 12px, transparent 13px),
     radial-gradient(circle at 90px 30px, rgba(255,255,255,0.18) 0 12px, transparent 13px);
   background-size: 120px 104px;
-  background-position: 0 0;
   mix-blend-mode: screen;
   filter: blur(0.6px) contrast(.98);
-  transform: translateZ(0);
-  animation: fog-slow 14s linear infinite alternate;
+  animation: flower-float 14s linear infinite alternate;
 }
-@keyframes fog-slow {
+@keyframes flower-float {
   0% { transform: translateY(0) scale(1); opacity: 0.07; }
-  100% { transform: translateY(-4px) scale(1.02); opacity: 0.10; }
+  100% { transform: translateY(-6px) scale(1.02); opacity: 0.11; }
 }
 
-/* ---------- desert / sand band (bottom) ---------- */
-/* moving sand gradient to give subtle motion */
-#elm-background .sand-layer{
+/* ---------- SAND LAYER (bottom band) ---------- */
+#elm-background .sand-layer {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 0; right: 0;
   bottom: 0;
   height: 28%;
   background:
@@ -153,55 +134,43 @@ body {
     radial-gradient(1000px 150px at 90% 70%, rgba(255,230,150,0.03), transparent 20%);
   pointer-events: none;
   mix-blend-mode: multiply;
-  animation: sandFlow 60s linear infinite;
+  animation: sand-flow 60s linear infinite;
   opacity: 0.95;
 }
-@keyframes sandFlow {
-  0% { background-position: 0 0, 0 0, 0 0; }
+@keyframes sand-flow {
+  0%   { background-position: 0 0, 0 0, 0 0; }
   100% { background-position: 1000px 0, -800px 0, 1200px 0; }
 }
 
-/* ---------- pyramids (CSS triangles) ---------- */
+/* ---------- PYRAMIDS (CSS triangles) ---------- */
 #elm-background .pyramid {
   position: absolute;
   bottom: calc(var(--elm-footer-height) + 6px);
-  width: 0;
-  height: 0;
+  width: 0; height: 0;
   border-left: 36px solid transparent;
   border-right: 36px solid transparent;
   border-bottom: 48px solid rgba(243,208,116,0.95);
-  transform-origin: bottom center;
   filter: drop-shadow(0 6px 8px rgba(0,0,0,0.35));
   opacity: 0.98;
+  pointer-events: none;
 }
+#elm-background .pyramid:nth-of-type(1) { left: 6%; transform: scale(.92); border-bottom-color: rgba(245,210,125,0.95); }
+#elm-background .pyramid:nth-of-type(2) { left: 32%; transform: scale(1.12); border-bottom-color: rgba(240,200,100,0.95); }
+#elm-background .pyramid:nth-of-type(3) { right: 6%; transform: scale(.86); border-bottom-color: rgba(235,190,95,0.95); }
 
-/* positions & sizes */
-#elm-background .pyramid:nth-of-type(1){ left: 6%; transform: scale(.9); border-bottom-color: rgba(245,210,125,0.95); }
-#elm-background .pyramid:nth-of-type(2){ left: 32%; transform: scale(1.1); border-bottom-color: rgba(240,200,100,0.95); }
-#elm-background .pyramid:nth-of-type(3){ right: 6%; transform: scale(.85); border-bottom-color: rgba(235,190,95,0.95); }
-
-/* add a small "face" highlight */
-#elm-background .pyramid::after{
+/* pyramid subtle face (small highlight) */
+#elm-background .pyramid::after {
   content: "";
   position: absolute;
-  left: -36px;
-  top: -48px;
-  border-left: 0 solid transparent;
-  border-right: 0 solid transparent;
-  width: 0; height: 0;
-  /* a soft shaded side using linear-gradient overlay via pseudo-element is tricky;
-     instead add a small inner gradient via box-shadow-like overlay technique */
-  box-shadow: 0 0 0 9999px rgba(0,0,0,0); /* no-op to keep element present */
+  left: -36px; top: -48px;
+  width: 72px; height: 48px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(0,0,0,0.0));
+  transform-origin: center;
+  opacity: 0.35;
+  pointer-events: none;
 }
 
-/* ---------- small responsive adjustments ---------- */
-@media (max-width: 900px){
-  #elm-background .pyramid{ display: none; }
-  #elm-background .flower-of-life{ opacity: 0.06; }
-  #elm-background::before{ opacity: 0.7; }
-}
-
-/* ---------- sidebar layout (left) ---------- */
+/* ---------- SIDEBAR + BUTTONS (left) ---------- */
 #sidebar {
   position: fixed;
   top: var(--elm-topbar-height);
@@ -211,88 +180,110 @@ body {
   padding: 10px 8px;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   gap: 6px;
   box-sizing: border-box;
-  z-index: 900; /* below topbar, above background */
-  pointer-events: auto;
-  background: transparent; /* let background show through */
+  z-index: 900; /* above background */
+  background: transparent;
 }
 
-/* scrollable nav area (buttons) */
+/* scrollable buttons */
 .sidebar-nav {
   flex-grow: 1;
   overflow-y: auto;
-  padding: 6px 8px 12px 8px;
+  padding: 6px 8px 12px;
   margin: 0;
   list-style: none;
 }
 
-/* matte button look — neutral, no bright blue */
-.sidebar-link {
+/* button look */
+#sidebar .sidebar-link {
   display: block;
   padding: 8px 10px;
   margin: 6px 6px;
   text-align: center;
-  background: rgba(11,11,11,0.3);
+  background: rgba(11,11,11,0.34);
   color: var(--muted-gray);
   border-radius: 8px;
   border: 1px solid rgba(120,120,120,0.12);
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
-  transition: transform 180ms cubic-bezier(.2,.9,.28,1), box-shadow 180ms, background 200ms, color 140ms;
+  transition: transform 200ms cubic-bezier(.2,.9,.28,1), box-shadow 200ms, background 200ms, color 160ms;
   will-change: transform;
-  -webkit-tap-highlight-color: transparent;
   box-shadow: 0 1px 0 rgba(0,0,0,0.25);
 }
 
-/* hover: bulge / bubble effect — subtle */
-.sidebar-link:hover,
-.sidebar-link:focus {
-  transform: translateY(-6px) scale(1.06);
-  color: #fff;
-  background: rgba(22,22,22,0.5);
-  border-color: rgba(160,160,160,0.14);
-  box-shadow: 0 10px 24px rgba(3,3,3,0.45);
+/* hover: bulge / bubble effect (higher specificity to beat theme rules) */
+#sidebar .sidebar-link:hover,
+#sidebar .sidebar-link:focus {
+  transform: translateY(-6px) scale(1.07) !important;
+  color: #fff !important;
+  background: rgba(22,22,22,0.60) !important;
+  border-color: rgba(160,160,160,0.14) !important;
+  box-shadow: 0 12px 30px rgba(3,3,3,0.48) !important;
+  outline: none;
 }
 
-/* active/current page - keep subtle (no blue) */
-.sidebar-link.active {
-  background: rgba(14,14,14,0.62);
+/* active/current */
+#sidebar .sidebar-link.active {
+  background: rgba(14,14,14,0.68);
   border-color: rgba(200,200,200,0.09);
   color: #fff;
   transform: translateY(-4px);
 }
 
-/* make small screens more compact */
-@media (max-width: 768px){
+/* small screens */
+@media (max-width: 768px) {
   #sidebar { width: 64px; }
-  .sidebar-link { padding: 6px; font-size: 0.86rem; }
+  #sidebar .sidebar-link { padding: 6px; font-size: 0.86rem; }
+  #elm-background .pyramid { display: none; }
+  #elm-background .flower-of-life { opacity: 0.06; }
 }
 
-/* ---------- ensure right panel doesn't clash with topbar ---------- */
-#panel-wrapper {
-  margin-top: calc(var(--elm-topbar-height) + 8px);
-  margin-bottom: var(--elm-footer-height);
-  max-height: calc(100vh - var(--elm-topbar-height) - var(--elm-footer-height));
-  overflow-y: auto;
-  box-sizing: border-box;
-  padding-top: 6px;
+/* ---------- FORCE TRANSPARENT BACKGROUNDS (targeted list) ----------
+   This list targets common wrappers used by the theme. Avoids a global '*'
+   rule so topbar and other fixed UI keep their intended backgrounds.
+   If a page still shows white, use the DevTools check below.
+---------------------------------------------- */
+:is(main, .container, .container-fluid, .site-main, .page-main, #main-wrapper,
+    article, .post, .page, .post-content, .content, .post-tail-wrapper,
+    .card, .card-body, .bg-white, .panel, .panel-body, .post-meta, .post-desc,
+    .post-title, .preview-img, .poetry_list, .category, .archive, .listing) {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
 }
 
-/* ---------- utility: hide name in sidebar if needed (optional) ---------- */
-/* uncomment the next rule if you want to hide the site title block inside the left sidebar */
-/* .sidebar-top .site-title { display: none !important; } */
+/* also ensure the right panel doesn't paint a white background */
+#panel-wrapper, aside, .access {
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  position: relative;
+  z-index: 10;
+}
 
-/* ---------- small accessibility niceties ---------- */
-.sidebar-link:focus { outline: 3px solid rgba(255,255,255,0.06); outline-offset: 3px; }
+/* make sure article/post content sits above background */
+main, article, .post, .page {
+  position: relative;
+  z-index: 1;
+}
 
-/* ---------- decorative helper elements (inserted via HTML) ---------- */
-/* We expect the following children inside #elm-background:
-   - .shooting-star (x3)
-   - .flower-of-life
-   - .pyramid (x3)
-   - optionally .sand-layer (if you want a moving sand overlay)
-   If .sand-layer is needed, add it inside the #elm-background element.
-*/
+/* small visual niceties */
+.post-title, h1, h2, h3 {
+  color: #eaeaea;
+}
+
+/* accessibility focus */
+#sidebar .sidebar-link:focus {
+  outline: 3px solid rgba(255,255,255,0.06);
+  outline-offset: 3px;
+}
+
+/* final safe guard for elements that stubbornly carry white bg */
+.bg-white, .card, .card-body, .panel {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* end of file */
