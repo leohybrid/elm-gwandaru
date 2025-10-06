@@ -180,13 +180,13 @@ html, body {
   list-style: none;
 }
 
-#sidebar .sidebar-link {
+#sidebar .sidebar-nav .sidebar-link {
   display: block;
   padding: 8px 10px;
   margin: 6px 6px;
   text-align: center;
-  background: rgba(11,11,11,0.34);
-  color: var(--muted-gray);
+  background: rgba(11,11,11,0.34) !important;
+  color: var(--muted-gray) !important;
   border-radius: 8px;
   border: 1px solid rgba(120,120,120,0.12);
   font-weight: 600;
@@ -196,8 +196,8 @@ html, body {
   box-shadow: 0 1px 0 rgba(0,0,0,0.25);
 }
 
-#sidebar .sidebar-link:hover,
-#sidebar .sidebar-link:focus {
+#sidebar .sidebar-nav .sidebar-link:hover,
+#sidebar .sidebar-nav .sidebar-link:focus {
   transform: translateY(-6px) scale(1.07) !important;
   color: #fff !important;
   background: rgba(22,22,22,0.60) !important;
@@ -206,11 +206,11 @@ html, body {
   outline: none !important;
 }
 
-#sidebar .sidebar-link.active {
-  background: rgba(14,14,14,0.68);
+#sidebar .sidebar-nav .sidebar-link.active {
+  background: rgba(14,14,14,0.68) !important;
   border-color: rgba(200,200,200,0.09);
-  color: #fff;
-  transform: translateY(-4px);
+  color: #fff !important;
+  transform: translateY(-4px) !important;
 }
 
 /* ---------- Hide Topbar on Home ---------- */
@@ -229,7 +229,7 @@ html, body {
    .post-tail-wrapper, .card, .card-body, .panel, .panel-body, .post-meta, .post-desc,
    .post-title, .preview-img, .poetry_list, .category, .archive, .listing,
    #panel-wrapper, aside, .access, .post-content-wrapper, .post-wrapper, .post-body, .content-wrapper,
-   .main, .layout-post) {
+   .main, .layout-post, .main-content, .post-content-main, .row, .col, .col-12, .col-md-8) {
   background: var(--post-bg) !important;
   background-color: transparent !important;
   box-shadow: none !important;
@@ -249,14 +249,20 @@ body.post-type-post .post-content,
 body.post-type-post .content-wrapper,
 body.post-type-post .post-body,
 body.post-type-post .main,
-body.post-type-post .layout-post {
+body.post-type-post .layout-post,
+body.post-type-post .main-content,
+body.post-type-post .post-content-main,
+body.post-type-post .row,
+body.post-type-post .col,
+body.post-type-post .col-12,
+body.post-type-post .col-md-8 {
   background: var(--post-bg) !important;
   background-color: transparent !important;
   z-index: 2 !important;
 }
 
 /* ---------- Fallback for Any White Background ---------- */
-[class*="post"], [class*="page"], [class*="content"], [class*="wrapper"], [class*="main"], [class*="layout"] {
+[class*="post"], [class*="page"], [class*="content"], [class*="wrapper"], [class*="main"], [class*="layout"], [class*="col"], [class*="row"] {
   background: var(--post-bg) !important;
   background-color: transparent !important;
 }
@@ -278,13 +284,13 @@ body.post-type-post .layout-post {
 /* ---------- Small Screens ---------- */
 @media (max-width: 768px) {
   #sidebar { width: 64px; }
-  #sidebar .sidebar-link { padding: 6px; font-size: 0.86rem; }
+  #sidebar .sidebar-nav .sidebar-link { padding: 6px; font-size: 0.86rem; }
   #elm-background .pyramid { display: none; }
   #elm-background .flower-of-life { opacity: 0.06; }
 }
 
 /* ---------- Accessibility ---------- */
-#sidebar .sidebar-link:focus {
+#sidebar .sidebar-nav .sidebar-link:focus {
   outline: 3px solid var(--accent-muted) !important;
   outline-offset: 3px;
 }
