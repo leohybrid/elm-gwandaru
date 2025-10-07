@@ -1,7 +1,6 @@
 ---
-layout: category
+layout: default
 title: Poetry
-category: poetry
 permalink: /categories/poetry/
 ---
 A collection of my poetry works.
