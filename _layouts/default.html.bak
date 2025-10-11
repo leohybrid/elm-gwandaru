@@ -6,7 +6,7 @@
   {% include head.html %}
 
   <body>
-    <!-- Global animated background -->
+    <!-- ✅ GLOBAL ANIMATED BACKGROUND -->
     <div id="elm-background" aria-hidden="true">
       <div class="shooting-star"></div>
       <div class="shooting-star"></div>
@@ -22,9 +22,7 @@
 
     <div id="main-wrapper" class="d-flex justify-content-center">
       <div class="container d-flex flex-column px-xxl-5">
-        {% unless page.hide_topbar %}
-          {% include topbar.html lang=lang %}
-        {% endunless %}
+        {% include topbar.html lang=lang %}
 
         <div class="row flex-grow-1">
           <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
@@ -54,7 +52,8 @@
               {% assign _include_path = _include | append: '.html' %}
               {% include {{ _include_path }} lang=lang %}
             {% endfor %}
-            <!-- Footer removed for seamless background blend -->
+
+            {% include_cached footer.html lang=lang %}
           </div>
         </div>
 
@@ -62,7 +61,7 @@
       </div>
 
       <aside aria-label="Scroll to Top">
-        <button id="back-to-top" type="button" class="btn btn-box-shadow">
+        <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
           <i class="fas fa-angle-up"></i>
         </button>
       </aside>
