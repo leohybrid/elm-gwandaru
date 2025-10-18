@@ -10,28 +10,27 @@
   --muted-gray: #bfbfbf;
   --accent-muted: rgba(255,255,255,0.06);
   --body-bg: transparent;
-  --post-bg: transparent;
-  --card-bg: transparent;
-  --panel-bg: transparent;
 }
 
-/* ---------- Page Offsets ---------- */
+/* ---------- Page Setup ---------- */
 html, body {
-  background: var(--body-bg) !important;
+  background: transparent !important;
   background-color: transparent !important;
-  margin: 0 !important;
+  margin: 0;
   padding-top: var(--elm-topbar-height);
   color: #eaeaea;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* ---------- Global Background Layer ---------- */
 #elm-background {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -10;
   pointer-events: none;
-  overflow: hidden;
+  min-height: 100vh;
   background: linear-gradient(
     to bottom,
     #03040a 0%,
@@ -40,14 +39,16 @@ html, body {
     #2b1f12 78%,
     #4a3210 100%
   );
-  background-attachment: scroll !important;
+  background-attachment: fixed;
 }
 
-/* ---------- Starfield (top) ---------- */
+/* ---------- Starfield (Top) ---------- */
 #elm-background::before {
   content: "";
   position: absolute;
-  left: 0; right: 0; top: 0;
+  left: 0;
+  right: 0;
+  top: 0;
   height: 42%;
   background:
     radial-gradient(1.8px 1.8px at 10% 25%, rgba(255,255,255,0.95) 0, transparent 45%),
@@ -55,7 +56,6 @@ html, body {
     radial-gradient(1.6px 1.6px at 78% 30%, rgba(200,225,255,0.85) 0, transparent 45%),
     radial-gradient(1.0px 1.0px at 33% 40%, rgba(255,250,210,0.8) 0, transparent 45%),
     radial-gradient(0.9px 0.9px at 88% 12%, rgba(240,240,255,0.85) 0, transparent 45%);
-  background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.92;
   mix-blend-mode: screen;
@@ -71,9 +71,10 @@ html, body {
 /* ---------- Shooting Stars ---------- */
 #elm-background .shooting-star {
   position: absolute;
-  width: 2px; height: 2px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0));
-  filter: blur(.3px) drop-shadow(0 0 6px rgba(255,255,255,0.18));
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.95), transparent);
+  filter: blur(0.3px) drop-shadow(0 0 6px rgba(255,255,255,0.18));
   opacity: 0;
   transform: rotate(-18deg);
   pointer-events: none;
@@ -90,18 +91,20 @@ html, body {
   100% { opacity: 0; transform: translate(160vw, 90vh) rotate(-18deg) scaleX(0.2); }
 }
 
-/* ---------- Flower of Life (middle) ---------- */
+/* ---------- Flower of Life (Middle) ---------- */
 #elm-background .flower-of-life {
   position: absolute;
-  left: 0; right: 0; top: 28%; height: 36%;
+  left: 0;
+  right: 0;
+  top: 28%;
+  height: 36%;
   opacity: 0.08;
-  pointer-events: none;
   background-image:
     radial-gradient(circle at 30px 30px, rgba(255,255,255,0.18) 0 12px, transparent 13px),
     radial-gradient(circle at 90px 30px, rgba(255,255,255,0.18) 0 12px, transparent 13px);
   background-size: 120px 104px;
   mix-blend-mode: screen;
-  filter: blur(0.6px) contrast(.98);
+  filter: blur(0.6px) contrast(0.98);
   animation: flower-float 14s linear infinite alternate;
 }
 
@@ -110,18 +113,20 @@ html, body {
   100% { transform: translateY(-6px) scale(1.02); opacity: 0.11; }
 }
 
-/* ---------- Sand Layer (bottom) ---------- */
+/* ---------- Sand Layer (Bottom) ---------- */
 #elm-background .sand-layer {
   position: absolute;
-  left: 0; right: 0; bottom: 0; height: 28%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30%;
   background:
     linear-gradient(180deg, rgba(50,38,24,0.02) 0%, rgba(64,44,22,0.06) 40%, rgba(88,52,18,0.10) 100%),
     radial-gradient(1200px 200px at 10% 60%, rgba(255,235,185,0.03), transparent 20%),
     radial-gradient(1000px 150px at 90% 70%, rgba(255,230,150,0.03), transparent 20%);
-  pointer-events: none;
   mix-blend-mode: multiply;
   animation: sand-flow 60s linear infinite;
-  opacity: 0.95;
+  opacity: 0.85;
 }
 
 @keyframes sand-flow {
@@ -132,36 +137,103 @@ html, body {
 /* ---------- Pyramids ---------- */
 #elm-background .pyramid {
   position: absolute;
-  bottom: 6px;
-  width: 0; height: 0;
+  bottom: -30px;
+  width: 0;
+  height: 0;
   border-left: 36px solid transparent;
   border-right: 36px solid transparent;
   border-bottom: 48px solid rgba(243,208,116,0.95);
   filter: drop-shadow(0 6px 8px rgba(0,0,0,0.35));
-  opacity: 0.98;
+  opacity: 0.8;
   pointer-events: none;
 }
 
-#elm-background .pyramid:nth-of-type(1) { left: 6%; transform: scale(.92); border-bottom-color: rgba(245,210,125,0.95); }
+#elm-background .pyramid:nth-of-type(1) { left: 6%; transform: scale(0.92); border-bottom-color: rgba(245,210,125,0.95); }
 #elm-background .pyramid:nth-of-type(2) { left: 32%; transform: scale(1.12); border-bottom-color: rgba(240,200,100,0.95); }
-#elm-background .pyramid:nth-of-type(3) { right: 6%; transform: scale(.86); border-bottom-color: rgba(235,190,95,0.95); }
+#elm-background .pyramid:nth-of-type(3) { right: 6%; transform: scale(0.86); border-bottom-color: rgba(235,190,95,0.95); }
 
 #elm-background .pyramid::after {
   content: "";
   position: absolute;
-  left: -36px; top: -48px;
-  width: 72px; height: 48px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(0,0,0,0.0));
-  transform-origin: center;
+  left: -36px;
+  top: -48px;
+  width: 72px;
+  height: 48px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent);
   opacity: 0.35;
+}
+
+/* ---------- Cacti ---------- */
+#elm-background .cactus {
+  position: absolute;
+  bottom: -20px;
+  width: 24px;
+  height: 40px;
+  background: linear-gradient(90deg, rgba(50,100,50,0.8), rgba(70,120,70,0.8));
+  border-radius: 12px 12px 0 0;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+  opacity: 0.7;
   pointer-events: none;
 }
 
-/* ---------- Sidebar + Buttons ---------- */
+#elm-background .cactus:nth-of-type(1) { left: 15%; transform: scale(0.8); }
+#elm-background .cactus:nth-of-type(2) { right: 15%; transform: scale(1.1); }
+
+#elm-background .cactus::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 10px;
+  width: 12px;
+  height: 20px;
+  background: linear-gradient(90deg, rgba(50,100,50,0.8), rgba(70,120,70,0.8));
+  border-radius: 6px;
+  transform: rotate(-30deg);
+}
+
+/* ---------- Animal Skull ---------- */
+#elm-background .skull {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 20px;
+  height: 12px;
+  background: radial-gradient(circle, rgba(200,200,200,0.7) 30%, rgba(180,180,180,0.5) 70%);
+  border-radius: 4px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  opacity: 0.6;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+#elm-background .skull::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 4px;
+  width: 4px;
+  height: 4px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
+}
+
+#elm-background .skull::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: 4px;
+  width: 4px;
+  height: 4px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
+}
+
+/* ---------- Sidebar ---------- */
 #sidebar {
   position: fixed;
   top: var(--elm-topbar-height);
-  left: 0; bottom: 0;
+  left: 0;
+  bottom: 0;
   width: var(--sidebar-width);
   padding: 10px 8px;
   display: flex;
@@ -169,7 +241,7 @@ html, body {
   gap: 6px;
   box-sizing: border-box;
   z-index: 900;
-  background: var(--body-bg) !important;
+  background: transparent;
 }
 
 .sidebar-nav {
@@ -183,43 +255,51 @@ html, body {
 #sidebar .sidebar-nav .sidebar-link {
   display: block;
   padding: 8px 10px;
-  margin: 6px 6px;
+  margin: 6px;
   text-align: center;
-  background: rgba(11,11,11,0.34) !important;
-  color: var(--muted-gray) !important;
+  background: rgba(11,11,11,0.34);
+  color: var(--muted-gray);
   border-radius: 8px;
   border: 1px solid rgba(120,120,120,0.12);
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
-  transition: transform 0.2s cubic-bezier(.2,.9,.28,1), box-shadow 0.2s, background 0.2s, color 0.16s;
+  transition: transform 0.25s cubic-bezier(0.2,0.9,0.28,1), box-shadow 0.25s, background 0.25s, color 0.16s;
   box-shadow: 0 1px 0 rgba(0,0,0,0.25);
 }
 
 #sidebar .sidebar-nav .sidebar-link:hover,
 #sidebar .sidebar-nav .sidebar-link:focus {
-  transform: translateY(-6px) scale(1.07) !important;
-  color: #fff !important;
-  background: rgba(22,22,22,0.60) !important;
-  border-color: rgba(160,160,160,0.14) !important;
-  box-shadow: 0 12px 30px rgba(3,3,3,0.48) !important;
-  outline: none !important;
+  transform: translateY(-6px) scale(1.07);
+  color: #fff;
+  background: rgba(22,22,22,0.6);
+  border-color: rgba(160,160,160,0.14);
+  box-shadow: 0 12px 30px rgba(3,3,3,0.48);
+  outline: none;
 }
 
 #sidebar .sidebar-nav .sidebar-link.active {
-  background: rgba(14,14,14,0.68) !important;
+  background: rgba(14,14,14,0.68);
   border-color: rgba(200,200,200,0.09);
-  color: #fff !important;
-  transform: translateY(-4px) !important;
+  color: #fff;
+  transform: translateY(-4px);
 }
 
-/* ---------- Hide Topbar on Home ---------- */
-.home #topbar, .home .site-topbar, .home .navbar {
-  display: none !important;
+#sidebar .sidebar-nav .sidebar-link:focus {
+  outline: 3px solid var(--accent-muted);
+  outline-offset: 3px;
 }
 
-/* ---------- Hide Footer ---------- */
-#footer, .site-footer {
+/* ---------- Hide Unwanted Elements ---------- */
+.home #topbar,
+.home .site-topbar,
+.home .navbar,
+.home #sidebar,
+.home #main-wrapper > .container > .row > aside,
+.home #main-wrapper > .container > .row > div,
+#footer,
+.site-footer,
+#tail-wrapper {
   display: none !important;
 }
 
@@ -228,151 +308,41 @@ html, body {
    article, .post, .post.px-1, .page, .post-content, .content, .content.post-content,
    .post-tail-wrapper, .card, .card-body, .panel, .panel-body, .post-meta, .post-desc,
    .post-title, .preview-img, .poetry_list, .category, .archive, .listing,
-   #panel-wrapper, aside, .access, .post-content-wrapper, .post-wrapper, .post-body, .content-wrapper,
-   .main, .layout-post, .main-content, .post-content-main, .row, .col, .col-12, .col-md-8) {
-  background: var(--post-bg) !important;
+   #panel-wrapper, aside, .access, .post-content-wrapper, .post-wrapper, .post-body,
+   .content-wrapper, .main, .layout-post, .layout--post, .layout--page, .main-content,
+   .post-content-main, .row, .col, .col-12, .col-md-8, #page, #content, #page-category,
+   .poetry, .categories, div[class*="poetry"], div[class*="category"], .poem, .poem-entry) {
+  background: transparent !important;
   background-color: transparent !important;
   box-shadow: none !important;
+  border: none !important;
   backdrop-filter: none !important;
   position: relative;
-  z-index: 2 !important;
+  z-index: 2;
 }
 
-/* ---------- Post-Specific Transparency ---------- */
-body.post-type-post #main-wrapper,
-body.post-type-post .container,
-body.post-type-post .page-content,
-body.post-type-post .post.px-1,
-body.post-type-post .content.post-content,
-body.post-type-post article,
-body.post-type-post .post-content,
-body.post-type-post .content-wrapper,
-body.post-type-post .post-body,
-body.post-type-post .main,
-body.post-type-post .layout-post,
-body.post-type-post .main-content,
-body.post-type-post .post-content-main,
-body.post-type-post .row,
-body.post-type-post .col,
-body.post-type-post .col-12,
-body.post-type-post .col-md-8 {
-  background: var(--post-bg) !important;
+/* Force transparency for all nested elements */
+:is(.post-content, .page-content, .poetry, .poetry_list, .category, .categories, .listing, .archive, .poem, .poem-entry) *,
+body > :where(p, div, section, article) {
+  background: transparent !important;
   background-color: transparent !important;
-  z-index: 2 !important;
-}
-
-/* ---------- Fallback for Any White Background ---------- */
-[class*="post"], [class*="page"], [class*="content"], [class*="wrapper"], [class*="main"], [class*="layout"], [class*="col"], [class*="row"] {
-  background: var(--post-bg) !important;
-  background-color: transparent !important;
-}
-
-/* ---------- Poem Styling ---------- */
-.post-type-post p {
-  color: #eaeaea;
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin: 0.5em 0;
-  text-align: center;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 /* ---------- Text and Headings ---------- */
-.post-title, h1, h2, h3 {
+:is(.post-title, h1, h2, h3, body p, .post-content p, .page-content p, .poetry p, .poetry_list p, .category p, .categories p, .listing p, .archive p, .poem p, .poem-entry p) {
   color: #eaeaea;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0.5em 0;
 }
 
 /* ---------- Small Screens ---------- */
 @media (max-width: 768px) {
   #sidebar { width: 64px; }
   #sidebar .sidebar-nav .sidebar-link { padding: 6px; font-size: 0.86rem; }
-  #elm-background .pyramid { display: none; }
+  #elm-background .pyramid, #elm-background .cactus, #elm-background .skull { display: none; }
   #elm-background .flower-of-life { opacity: 0.06; }
 }
-
-/* ---------- Accessibility ---------- */
-#sidebar .sidebar-nav .sidebar-link:focus {
-  outline: 3px solid var(--accent-muted) !important;
-  outline-offset: 3px;
-}
-/* ✅ Force all lone <p> tags under body to use transparent bg */
-body > p {
-  background: transparent !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-/* ✅ Also cover any div wrapping them */
-body > div,
-body > section,
-body > article {
-  background: transparent !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-/* ============================================================
-   FINAL PATCH — 2025-10-07
-   Fix white backgrounds + sidebar hover + bottom blend
-============================================================ */
-
-/* --- Sidebar Hover (restore glow + lift) --- */
-#sidebar .sidebar-nav .sidebar-link:hover,
-#sidebar .sidebar-nav .sidebar-link:focus {
-  transform: translateY(-6px) scale(1.07) !important;
-  color: #fff !important;
-  background: rgba(22,22,22,0.6) !important;
-  border-color: rgba(160,160,160,0.14) !important;
-  box-shadow: 0 12px 30px rgba(3,3,3,0.48) !important;
-  transition: all 0.25s ease-out !important;
-}
-
-/* --- Fix bottom background band --- */
-#elm-background .pyramid { bottom: -20px !important; opacity: 0.8 !important; }
-#elm-background .sand-layer { height: 25% !important; opacity: 0.85 !important; }
-
-/* --- Full transparency override for posts, poems, category pages --- */
-body, html,
-.post, .page, .content, .post-content, .page-content,
-.layout--post, .layout--page, .wrapper, .container, .main,
-#main-wrapper, #page, #content, .content-wrapper, .post-body {
-  background: transparent !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-
-/* --- Poetry page & category wrapper --- */
-#page-category,
-.poetry_list,
-.poetry,
-.category,
-.categories,
-.listing,
-.archive,
-div[class*="poetry"],
-div[class*="category"] {
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-/* --- Force transparent child wrappers (fix white <p> in poems) --- */
-.post-content * {
-  background: transparent !important;
-  color: #eaeaea !important;
-}
-
-/* --- Body text color (poems & posts) --- */
-body p,
-.post-content p,
-.page-content p {
-  color: #eaeaea !important;
-  background: transparent !important;
-}
-
-/* --- Fix footer strip still visible --- */
-#footer, .site-footer, #tail-wrapper {
-  background: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-}
-

@@ -16,6 +16,9 @@
       <div class="pyramid"></div>
       <div class="pyramid"></div>
       <div class="pyramid"></div>
+      <div class="cactus"></div>
+      <div class="cactus"></div>
+      <div class="skull"></div>
     </div>
 
     {% include sidebar.html lang=lang %}
@@ -40,25 +43,12 @@
               {% include_cached update-list.html lang=lang %}
               {% include_cached trending-tags.html lang=lang %}
             </div>
-
             {% for _include in layout.panel_includes %}
               {% assign _include_path = _include | append: '.html' %}
               {% include {{ _include_path }} lang=lang %}
             {% endfor %}
           </aside>
         </div>
-
-        <div class="row">
-          <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
-            {% for _include in layout.tail_includes %}
-              {% assign _include_path = _include | append: '.html' %}
-              {% include {{ _include_path }} lang=lang %}
-            {% endfor %}
-            <!-- Footer removed for seamless background blend -->
-          </div>
-        </div>
-
-        {% include_cached search-results.html lang=lang %}
       </div>
 
       <aside aria-label="Scroll to Top">
