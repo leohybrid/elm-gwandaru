@@ -1,5 +1,5 @@
-_site/
-node_modules/
-.sass-cache/
-.jekyll-cache/
 *.txt
+*.bak
+_site/
+.jekyll-cache/
+.sass-cache/
