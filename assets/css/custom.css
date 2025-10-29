@@ -328,8 +328,6 @@ html, body {
 /* ---------- Hide Unwanted Elements ---------- */
 .home #topbar,
 .home .site-topbar,
-.home .navbar,
-.home #sidebar,
 .home #main-wrapper > .container > .row > aside,
 .home #main-wrapper > .container > .row > div,
 #footer,
