@@ -1,22 +1,8 @@
 ---
 layout: default
 ---
-<!-- ✅ GLOBAL BACKGROUND INSERT -->
-<div id="elm-background" aria-hidden="true">
-  <div class="shooting-star"></div>
-  <div class="shooting-star"></div>
-  <div class="shooting-star"></div>
-  <div class="flower-of-life"></div>
-  <div class="pyramid"></div>
-  <div class="pyramid"></div>
-  <div class="pyramid"></div>
-</div>
----
-layout: default
----
 
 <div class="poetry-list-container">
-
   <h1 class="page-title">Poetry</h1>
 
   {%- assign sorted_posts = site.posts | sort: "date" | reverse -%}
@@ -41,5 +27,4 @@ layout: default
       </article>
     {%- endfor -%}
   </div>
-
 </div>
