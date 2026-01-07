@@ -5,7 +5,7 @@
 
 /* ---- FORCE BACKGROUND AND ALL ELEMENTS VISIBLE ---- */
 #elm-background,
-#elm-background > div,
+#elm-background>div,
 .shooting-star,
 .flower-of-life,
 .sand-layer,
@@ -17,10 +17,18 @@
 }
 
 /* ---- NUCLEAR FIX — CHIRPY CANNOT HIDE THIS ---- */
-html, body, #elm-background {
+html,
+body {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+#elm-background {
   background: #1a1a1a !important;
   background-color: #1a1a1a !important;
+  /* Fallback */
 }
+
 #elm-background {
   position: fixed !important;
   inset: 0 !important;
@@ -29,7 +37,12 @@ html, body, #elm-background {
   opacity: 1 !important;
   display: block !important;
 }
-body::before, body::after, .bg-cover, [class*="bg-"], .theme-bg {
+
+body::before,
+body::after,
+.bg-cover,
+[class*="bg-"],
+.theme-bg {
   background: none !important;
   background-image: none !important;
 }
@@ -39,14 +52,13 @@ body::before, body::after, .bg-cover, [class*="bg-"], .theme-bg {
   --elm-topbar-height: 64px;
   --sidebar-width: 240px;
   --muted-gray: #bfbfbf;
-  --accent-muted: rgba(255,255,255,0.06);
+  --accent-muted: rgba(255, 255, 255, 0.06);
   --elm-dark-bg: #1a1a1a;
 }
 
 /* ---------- Page Setup ---------- */
-html, body {
-  background: #1a1a1a !important;
-  background-color: #1a1a1a !important;
+html,
+body {
   margin: 0;
   padding-top: var(--elm-topbar-height);
   color: #eaeaea;
@@ -62,14 +74,12 @@ html, body {
   z-index: -10;
   pointer-events: none;
   min-height: 100vh;
-  background: linear-gradient(
-    to bottom,
-    #03040a 0%,
-    #07102a 28%,
-    #111018 50%,
-    #2b1f12 78%,
-    #4a3210 100%
-  );
+  background: linear-gradient(to bottom,
+      #03040a 0%,
+      #07102a 28%,
+      #111018 50%,
+      #2b1f12 78%,
+      #4a3210 100%);
   background-attachment: fixed;
 }
 
@@ -77,21 +87,34 @@ html, body {
 #elm-background::before {
   content: "";
   position: absolute;
-  left: 0; right: 0; top: 0; height: 42%;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 42%;
   background:
-    radial-gradient(1.8px 1.8px at 10% 25%, rgba(255,255,255,0.95) 0, transparent 45%),
-    radial-gradient(1.2px 1.2px at 45% 12%, rgba(230,230,255,0.85) 0, transparent 45%),
-    radial-gradient(1.6px 1.6px at 78% 30%, rgba(200,225,255,0.85) 0, transparent 45%),
-    radial-gradient(1.0px 1.0px at 33% 40%, rgba(255,250,210,0.8) 0, transparent 45%),
-    radial-gradient(0.9px 0.9px at 88% 12%, rgba(240,240,255,0.85) 0, transparent 45%);
+    radial-gradient(1.8px 1.8px at 10% 25%, rgba(255, 255, 255, 0.95) 0, transparent 45%),
+    radial-gradient(1.2px 1.2px at 45% 12%, rgba(230, 230, 255, 0.85) 0, transparent 45%),
+    radial-gradient(1.6px 1.6px at 78% 30%, rgba(200, 225, 255, 0.85) 0, transparent 45%),
+    radial-gradient(1.0px 1.0px at 33% 40%, rgba(255, 250, 210, 0.8) 0, transparent 45%),
+    radial-gradient(0.9px 0.9px at 88% 12%, rgba(240, 240, 255, 0.85) 0, transparent 45%);
   background-size: cover;
   opacity: 0.92;
   mix-blend-mode: screen;
   animation: star-twinkle 6s linear infinite;
 }
+
 @keyframes star-twinkle {
-  0%, 100% { opacity: 0.86; transform: translateY(0); }
-  50% { opacity: 1; transform: translateY(-1px); }
+
+  0%,
+  100% {
+    opacity: 0.86;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
 }
 
 /* ---------- Shooting Stars ---------- */
@@ -99,26 +122,58 @@ html, body {
   position: absolute;
   width: 2px;
   height: 2px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.95), transparent);
-  filter: blur(0.3px) drop-shadow(0 0 6px rgba(255,255,255,0.18));
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), transparent);
+  filter: blur(0.3px) drop-shadow(0 0 6px rgba(255, 255, 255, 0.18));
   opacity: 0;
   transform: rotate(-18deg);
   pointer-events: none;
 }
-#elm-background .shooting-star:nth-of-type(1) { top: 8%; left: -24%; animation: star-shoot 3.8s linear 0.4s infinite; }
-#elm-background .shooting-star:nth-of-type(2) { top: 18%; left: -30%; animation: star-shoot 4.9s linear 1.8s infinite; }
-#elm-background .shooting-star:nth-of-type(3) { top: 6%; left: -12%; animation: star-shoot 5.6s linear 1.1s infinite; }
+
+#elm-background .shooting-star:nth-of-type(1) {
+  top: 8%;
+  left: -24%;
+  animation: star-shoot 3.8s linear 0.4s infinite;
+}
+
+#elm-background .shooting-star:nth-of-type(2) {
+  top: 18%;
+  left: -30%;
+  animation: star-shoot 4.9s linear 1.8s infinite;
+}
+
+#elm-background .shooting-star:nth-of-type(3) {
+  top: 6%;
+  left: -12%;
+  animation: star-shoot 5.6s linear 1.1s infinite;
+}
+
 @keyframes star-shoot {
-  0% { opacity: 0; transform: translate(0,0) rotate(-18deg) scaleX(1); }
-  8% { opacity: 1; }
-  40% { opacity: 0.85; }
-  100% { opacity: 0; transform: translate(160vw, 90vh) rotate(-18deg) scaleX(0.2); }
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(-18deg) scaleX(1);
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0.85;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(160vw, 90vh) rotate(-18deg) scaleX(0.2);
+  }
 }
 
 /* ---------- Flower of Life ---------- */
 #elm-background .flower-of-life {
   position: absolute;
-  left: 0; right: 0; top: 20%; height: 60%;
+  left: 0;
+  right: 0;
+  top: 20%;
+  height: 60%;
   opacity: 0.15;
   background-image: url('../img/flower-of-life.png');
   background-size: contain;
@@ -128,15 +183,26 @@ html, body {
   filter: blur(0.5px) contrast(1.1);
   animation: flower-float 20s linear infinite alternate;
 }
+
 @keyframes flower-float {
-  0% { transform: translateY(0) scale(1); opacity: 0.07; }
-  100% { transform: translateY(-6px) scale(1.02); opacity: 0.11; }
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.07;
+  }
+
+  100% {
+    transform: translateY(-6px) scale(1.02);
+    opacity: 0.11;
+  }
 }
 
 /* ---------- Sand Layer ---------- */
 #elm-background .sand-layer {
   position: absolute;
-  left: 0; right: 0; bottom: 0; height: 35vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 35vh;
   background-image: url('../img/sahara-dunes.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -144,9 +210,15 @@ html, body {
   opacity: 0.9;
   z-index: 10;
 }
+
 @keyframes sand-flow {
-  0% { background-position: 0 0, 0 0, 0 0; }
-  100% { background-position: 1000px 0, -800px 0, 1200px 0; }
+  0% {
+    background-position: 0 0, 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 1000px 0, -800px 0, 1200px 0;
+  }
 }
 
 /* ---------- Pyramids ---------- */
@@ -156,26 +228,88 @@ html, body {
 #elm-background .skull {
   display: none !important;
 }
+
 #elm-background .skull::before,
 #elm-background .skull::after {
   content: "";
   position: absolute;
   top: -2px;
-  width: 4px; height: 4px;
-  background: rgba(0,0,0,0.3);
+  width: 4px;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 50%;
 }
-#elm-background .skull::before { left: 4px; }
-#elm-background .skull::after { right: 4px; }
+
+#elm-background .skull::before {
+  left: 4px;
+}
+
+#elm-background .skull::after {
+  right: 4px;
+}
 
 /* ---------- Sidebar & Transparency ---------- */
-#sidebar { position: fixed; top: var(--elm-topbar-height); left: 0; bottom: 0; width: var(--sidebar-width); padding: 10px 8px; display: flex; flex-direction: column; gap: 6px; box-sizing: border-box; z-index: 900; background: transparent; }
-.sidebar-nav { flex-grow: 1; overflow-y: auto; padding: 6px 8px 12px; margin: 0; list-style: none; }
-#sidebar .sidebar-nav .sidebar-link { display: block; padding: 8px 10px; margin: 6px; text-align: center; background: rgba(11,11,11,0.34); color: var(--muted-gray); border-radius: 8px; border: 1px solid rgba(120,120,120,0.12); font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: transform 0.25s cubic-bezier(0.2,0.9,0.28,1), box-shadow 0.25s, background 0.25s, color 0.16s; box-shadow: 0 1px 0 rgba(0,0,0,0.25); }
-#sidebar .sidebar-nav .sidebar-link:hover, #sidebar .sidebar-nav .sidebar-link:focus { transform: translateY(-6px) scale(1.07); color: #fff; background: rgba(22,22,22,0.6); border-color: rgba(160,160,160,0.14); box-shadow: 0 12px 30px rgba(3,3,3,0.48); outline: none; }
-#sidebar .sidebar-nav .sidebar-link.active { background: rgba(14,14,14,0.68); border-color: rgba(200,200,200,0.09); color: #fff; transform: translateY(-4px); }
+#sidebar {
+  position: fixed;
+  top: var(--elm-topbar-height);
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+  z-index: 900;
+  background: transparent;
+}
 
-#footer, .site-footer, #tail-wrapper { display: none !important; }
+.sidebar-nav {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 6px 8px 12px;
+  margin: 0;
+  list-style: none;
+}
+
+#sidebar .sidebar-nav .sidebar-link {
+  display: block;
+  padding: 8px 10px;
+  margin: 6px;
+  text-align: center;
+  background: rgba(11, 11, 11, 0.34);
+  color: var(--muted-gray);
+  border-radius: 8px;
+  border: 1px solid rgba(120, 120, 120, 0.12);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.28, 1), box-shadow 0.25s, background 0.25s, color 0.16s;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+#sidebar .sidebar-nav .sidebar-link:hover,
+#sidebar .sidebar-nav .sidebar-link:focus {
+  transform: translateY(-6px) scale(1.07);
+  color: #fff;
+  background: rgba(22, 22, 22, 0.6);
+  border-color: rgba(160, 160, 160, 0.14);
+  box-shadow: 0 12px 30px rgba(3, 3, 3, 0.48);
+  outline: none;
+}
+
+#sidebar .sidebar-nav .sidebar-link.active {
+  background: rgba(14, 14, 14, 0.68);
+  border-color: rgba(200, 200, 200, 0.09);
+  color: #fff;
+  transform: translateY(-4px);
+}
+
+#footer,
+.site-footer,
+#tail-wrapper {
+  display: none !important;
+}
 
 :is(main, .container, .container-fluid, .site-main, .page-main, #main-wrapper, article, .post, .post.px-1, .page, .post-content, .content, .content.post-content, .post-tail-wrapper, .card, .card-body, .panel, .panel-body, .post-meta, .post-desc, .post-title, .preview-img, .poetry_list, .category, .archive, .listing, #panel-wrapper, aside, .access, .post-content-wrapper, .post-wrapper, .post-body, .content-wrapper, .main, .layout-post, .layout--post, .layout--page, .main-content, .post-content-main, .row, .col, .col-12, .col-md-8, #page, #content, #page-category, .poetry, .categories, div[class*="poetry"], div[class*="category"], .poem, .poem-entry) {
   background: transparent !important;
@@ -197,10 +331,22 @@ html, body {
 
 /* ---------- Mobile ---------- */
 @media (max-width: 768px) {
-  #sidebar { width: 64px; }
-  #sidebar .sidebar-nav .sidebar-link { padding: 6px; font-size: 0.86rem; }
+  #sidebar {
+    width: 64px;
+  }
+
+  #sidebar .sidebar-nav .sidebar-link {
+    padding: 6px;
+    font-size: 0.86rem;
+  }
+
   #elm-background .pyramid,
   #elm-background .cactus,
-  #elm-background .skull { display: none; }
-  #elm-background .flower-of-life { opacity: 0.06; }
+  #elm-background .skull {
+    display: none;
+  }
+
+  #elm-background .flower-of-life {
+    opacity: 0.06;
+  }
 }
