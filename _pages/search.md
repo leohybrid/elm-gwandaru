@@ -13,8 +13,14 @@ permalink: /search/
     aria-label="search"
     autocomplete="off"
   >
-  {% include search-results.html %}
+  
+  <div id="search-hints" class="mt-4">
+    {% include_cached trending-tags.html lang=include.lang %}
+  </div>
+  
+  <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
 </div>
 
 {% include search-loader.html %}
+
 
