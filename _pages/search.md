@@ -24,25 +24,30 @@ permalink: /search/
 
 <script>
   // Auto-populate search from URL query parameter
-  document.addEventListener('DOMContentLoaded', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const query = urlParams.get('q');
-    const searchInput = document.getElementById('search-input');
-    
-    if (query && searchInput) {
-      searchInput.value = query;
-      // Trigger the search by dispatching input event
-      searchInput.dispatchEvent(new Event('input', { bubbles: true }));
-      // Hide search hints when showing results
-      const hints = document.getElementById('search-hints');
-      if (hints) {
-        hints.style.display = 'none';
+  // Wait for SimpleJekyllSearch to initialize before triggering search
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const query = urlParams.get('q');
+      const searchInput = document.getElementById('search-input');
+      
+      if (query && searchInput) {
+        searchInput.value = query;
+        // Trigger the search by dispatching input event
+        searchInput.dispatchEvent(new Event('input', { bubbles: true }));
+        searchInput.dispatchEvent(new Event('change', { bubbles: true }));
+        // Hide search hints when showing results
+        const hints = document.getElementById('search-hints');
+        if (hints) {
+          hints.style.display = 'none';
+        }
       }
-    }
+    }, 500); // Wait 500ms for SimpleJekyllSearch to initialize
   });
 </script>
 
 {% include search-loader.html %}
+
 
 
 
