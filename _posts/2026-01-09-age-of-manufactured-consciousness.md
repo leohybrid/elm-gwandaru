@@ -1,10 +1,12 @@
 ---
+layout: post
 title: "The Age of Manufactured Consciousness"
 date: 2026-01-09 01:55:00 +0300
 categories: [blog]
 tags: [philosophy, society, consciousness, truth, power]
 description: "A meditation on the quiet violence of narrative control, manufactured consent, and the engineering of modern consciousness."
 ---
+
 
 There is a quieter violence than war, subtler than famine, and far more efficient than chains. It does not bruise the body. It pacifies the mind. It convinces a human being that what they are seeing is all there is, and that what they are told is safer than what they think. This is the violence of our age, and it wears the costume of normalcy.
 
