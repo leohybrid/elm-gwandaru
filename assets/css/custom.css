@@ -13,7 +13,7 @@
 #elm-background::before {
   display: block !important;
   visibility: visible !important;
-  opacity: 1 !important;
+  /* Removed opacity: 1 !important to allow animations to work */
 }
 
 /* ---- NUCLEAR FIX — CHIRPY CANNOT HIDE THIS ---- */
@@ -24,8 +24,9 @@ body {
 }
 
 #elm-background {
-  background: #1a1a1a !important;
-  background-color: #1a1a1a !important;
+  /* Removed !important to allow gradient to show */
+  background: #1a1a1a;
+  background-color: #1a1a1a;
   /* Fallback */
 }
 
@@ -175,24 +176,30 @@ body {
   top: 20%;
   height: 60%;
   opacity: 0.15;
-  background-image: url('../img/flower-of-life.png');
+  background-image: url('../img/flower-of-life.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   mix-blend-mode: screen;
-  filter: blur(0.5px) contrast(1.1);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
   animation: flower-float 20s linear infinite alternate;
 }
 
 @keyframes flower-float {
   0% {
-    transform: translateY(0) scale(1);
-    opacity: 0.07;
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 0.15;
   }
 
   100% {
-    transform: translateY(-6px) scale(1.02);
-    opacity: 0.11;
+    transform: translateY(-15px) scale(1.05) rotate(5deg);
+    opacity: 0.1;
   }
 }
 
@@ -203,12 +210,13 @@ body {
   right: 0;
   bottom: 0;
   height: 35vh;
-  background-image: url('../img/sahara-dunes.png');
+  background-image: url('../img/sahara-dunes-final.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center bottom;
   opacity: 0.9;
   z-index: 10;
+  animation: sand-flow 40s linear infinite alternate;
 }
 
 @keyframes sand-flow {
@@ -311,18 +319,32 @@ body {
   display: none !important;
 }
 
-:is(main, .container, .container-fluid, .site-main, .page-main, #main-wrapper, article, .post, .post.px-1, .page, .post-content, .content, .content.post-content, .post-tail-wrapper, .card, .card-body, .panel, .panel-body, .post-meta, .post-desc, .post-title, .preview-img, .poetry_list, .category, .archive, .listing, #panel-wrapper, aside, .access, .post-content-wrapper, .post-wrapper, .post-body, .content-wrapper, .main, .layout-post, .layout--post, .layout--page, .main-content, .post-content-main, .row, .col, .col-12, .col-md-8, #page, #content, #page-category, .poetry, .categories, div[class*="poetry"], div[class*="category"], .poem, .poem-entry) {
+/* ---- NUCLEAR OPTION: FORCE TRANSPARENCY ON ALL CONTENT ---- */
+/* This ensures the cosmic background is ALWAYS visible */
+#main-wrapper,
+#main-wrapper *,
+#sidebar *,
+#panel-wrapper *,
+#post-list *,
+.card-wrapper,
+.post-content,
+article,
+.card {
   background: transparent !important;
   background-color: transparent !important;
   box-shadow: none !important;
-  border: none !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  /* Keep faint borders for structure if needed */
   backdrop-filter: none !important;
-  position: relative;
-  z-index: 2;
 }
 
-:is(.post-title, h1, h2, h3, body p, .post-content p, .page-content p, .poetry p, .poetry_list p, .category p, .categories p, .listing p, .archive p, .poem p, .poem-entry p) {
-  color: #eaeaea;
+/* Exception for images so they aren't hidden if they have backgrounds (though usually they are opaque) */
+#main-wrapper img {
+  background: transparent !important;
+}
+
+:is(.post-title, h1, h2, h3, h4, h5, h6, body p, .post-content p, .page-content p, .poetry p, .poetry_list p, .category p, .categories p, .listing p, .archive p, .poem p, .poem-entry p, li, span) {
+  color: #eaeaea !important;
   text-align: center;
   font-size: 1.1rem;
   line-height: 1.6;
