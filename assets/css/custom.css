@@ -1,44 +1,47 @@
-/* ============================================================= */
-/* ELM GWANDARU — FINAL WORKING CUSTOM.CSS                      */
-/* Just paste this entire file — background will appear 100%    */
-/* ============================================================= */
+/* ---- UNIVERSAL VISIBILITY & BACKGROUND FIX ---- */
+html {
+  background: #03040a !important;
+  /* Fixed solid base to kill checkerboard */
+}
 
-/* ---- FORCE BACKGROUND AND ALL ELEMENTS VISIBLE ---- */
+body {
+  background: transparent !important;
+  /* Transparent body to show background through */
+  background-color: transparent !important;
+  /* Killer of Checkerboard */
+}
+
 #elm-background,
-#elm-background>div,
+#elm-background div,
 .shooting-star,
 .flower-of-life,
 .sand-layer,
-/* .pyramid, .cactus, .skull, REMOVED for clean design */
-#elm-background::before {
+.pyramid,
+.cactus,
+.skull,
+.sun-glow,
+.sand-pellets {
   display: block !important;
   visibility: visible !important;
-  /* Removed opacity: 1 !important to allow animations to work */
-}
-
-/* ---- NUCLEAR FIX — CHIRPY CANNOT HIDE THIS ---- */
-html,
-body {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-#elm-background {
-  /* Removed !important to allow gradient to show */
-  background: #1a1a1a;
-  background-color: #1a1a1a;
-  /* Fallback */
+  opacity: 1 !important;
 }
 
 #elm-background {
   position: fixed !important;
   inset: 0 !important;
-  z-index: -10 !important;
+  z-index: -1 !important;
+  /* Above HTML bg, below transparent content */
   pointer-events: none !important;
-  opacity: 1 !important;
-  display: block !important;
+  background: linear-gradient(to bottom,
+      #03040a 0%,
+      #07102a 28%,
+      #111018 50%,
+      #2b1f12 78%,
+      #4a3210 100%);
+  overflow: hidden;
 }
 
+/* kill theme defaults */
 body::before,
 body::after,
 .bg-cover,
@@ -68,21 +71,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ---------- Global Background Layer ---------- */
-#elm-background {
-  position: fixed;
-  inset: 0;
-  z-index: -10;
-  pointer-events: none;
-  min-height: 100vh;
-  background: linear-gradient(to bottom,
-      #03040a 0%,
-      #07102a 28%,
-      #111018 50%,
-      #2b1f12 78%,
-      #4a3210 100%);
-  background-attachment: fixed;
-}
+/* Starfield handled by ::before on #elm-background */
 
 /* ---------- Starfield (Top) ---------- */
 #elm-background::before {
@@ -229,31 +218,168 @@ body {
   }
 }
 
-/* ---------- Pyramids ---------- */
-/* ---------- Elements Hidden per Design ---------- */
-#elm-background .pyramid,
-#elm-background .cactus,
-#elm-background .skull {
-  display: none !important;
+/* ---------- Sun Horizon Glow ---------- */
+#elm-background .sun-glow {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60vh;
+  background: radial-gradient(circle at 50% 100%,
+      rgba(255, 140, 50, 0.25) 0%,
+      rgba(255, 80, 20, 0.08) 35%,
+      transparent 70%);
+  pointer-events: none;
+  z-index: 5;
+  filter: blur(2px);
+  animation: sun-pulse 8s ease-in-out infinite alternate;
 }
 
-#elm-background .skull::before,
-#elm-background .skull::after {
+@keyframes sun-pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* ---------- Sand Pellets (Grain) ---------- */
+#elm-background .sand-pellets {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 100;
+  mix-blend-mode: overlay;
+}
+
+/* ---------- Pyramids (Periphery) ---------- */
+#elm-background .pyramid {
+  position: absolute;
+  bottom: 12%;
+  width: 0;
+  height: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-bottom: 110px solid #2a1b0c;
+  /* Deep shadow side */
+  filter: drop-shadow(40px 0 20px rgba(0, 0, 0, 0.4));
+  z-index: 8;
+  perspective: 1000px;
+}
+
+#elm-background .pyramid::after {
   content: "";
   position: absolute;
-  top: -2px;
-  width: 4px;
-  height: 4px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 50%;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 0 solid transparent;
+  border-right: 80px solid transparent;
+  border-bottom: 110px solid #4a3210;
+  /* Lit side */
+  opacity: 0.7;
 }
 
+#elm-background .pyramid:nth-of-type(1) {
+  left: -20px;
+  transform: scale(0.9) rotateY(-10deg);
+  filter: blur(0.5px);
+}
+
+#elm-background .pyramid:nth-of-type(2) {
+  right: -30px;
+  transform: scale(1.1) rotateY(15deg);
+  filter: blur(0.2px);
+  z-index: 9;
+}
+
+#elm-background .pyramid:nth-of-type(3) {
+  left: 10%;
+  bottom: 18%;
+  transform: scale(0.4);
+  opacity: 0.4;
+  filter: blur(2px);
+}
+
+/* ---------- Bird Skeletons (Detailed) ---------- */
+#elm-background .skull {
+  position: absolute;
+  bottom: 6%;
+  width: 60px;
+  height: 30px;
+  background: transparent;
+  z-index: 15;
+  opacity: 0.8;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* ribcage */
 #elm-background .skull::before {
-  left: 4px;
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  width: 40px;
+  height: 15px;
+  background: repeating-linear-gradient(to right, #ddd, #ddd 2px, transparent 2px, transparent 6px);
+  border-radius: 5px;
+  opacity: 0.6;
 }
 
+/* head/skull */
 #elm-background .skull::after {
-  right: 4px;
+  content: "◥";
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #eee;
+  font-size: 24px;
+  transform: rotate(45deg);
+}
+
+#elm-background .skull:nth-of-type(1) {
+  left: 5%;
+  transform: rotate(5deg) scale(0.8);
+}
+
+#elm-background .skull:nth-of-type(2) {
+  right: 15%;
+  bottom: 3%;
+  transform: rotate(-15deg) scale(0.6);
+  opacity: 0.5;
+  filter: blur(1px);
+}
+
+/* ---------- Cactus ---------- */
+#elm-background .cactus {
+  position: absolute;
+  bottom: 10%;
+  width: 5px;
+  height: 40px;
+  background: #1a2210;
+  border-radius: 5px;
+  z-index: 9;
+  filter: blur(0.5px);
+}
+
+#elm-background .cactus:nth-of-type(1) {
+  left: 20%;
+  transform: scale(1.3);
+}
+
+#elm-background .cactus:nth-of-type(2) {
+  right: 25%;
+  bottom: 8%;
+  transform: scale(0.9);
+  opacity: 0.4;
+  filter: blur(2px);
 }
 
 /* ---------- Sidebar & Transparency ---------- */
@@ -315,8 +441,18 @@ body {
 
 #footer,
 .site-footer,
-#tail-wrapper {
+#tail-wrapper,
+#back-to-top,
+#search-results,
+.pagination,
+nav.pagination,
+.page-item,
+.page-link,
+#notification,
+[aria-label="Pagination"] {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 /* ---- NUCLEAR OPTION: FORCE TRANSPARENCY ON ALL CONTENT ---- */
@@ -336,11 +472,19 @@ article,
   border-color: rgba(255, 255, 255, 0.1) !important;
   /* Keep faint borders for structure if needed */
   backdrop-filter: none !important;
+  position: relative;
+  z-index: 20;
 }
 
 /* Exception for images so they aren't hidden if they have backgrounds (though usually they are opaque) */
 #main-wrapper img {
   background: transparent !important;
+}
+
+/* Hide search results and panel wrapper to prevent white tile */
+#search-results,
+#panel-wrapper {
+  display: none !important;
 }
 
 :is(.post-title, h1, h2, h3, h4, h5, h6, body p, .post-content p, .page-content p, .poetry p, .poetry_list p, .category p, .categories p, .listing p, .archive p, .poem p, .poem-entry p, li, span) {
@@ -360,12 +504,6 @@ article,
   #sidebar .sidebar-nav .sidebar-link {
     padding: 6px;
     font-size: 0.86rem;
-  }
-
-  #elm-background .pyramid,
-  #elm-background .cactus,
-  #elm-background .skull {
-    display: none;
   }
 
   #elm-background .flower-of-life {
