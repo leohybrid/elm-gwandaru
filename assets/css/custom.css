@@ -194,16 +194,13 @@ body {
 
 /* ---------- Sand Layer ---------- */
 #elm-background .sand-layer {
+  display: none !important;
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   height: 35vh;
-  background-image: url('../img/sahara-dunes.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  opacity: 0.9;
+  opacity: 0;
   z-index: 10;
   animation: sand-flow 40s linear infinite alternate;
 }
